@@ -17,6 +17,7 @@
  * Time: 20:06
  * Func: 实现用户登陆功能
  */
+session_start();
 
 include 'connection.php';
 
@@ -80,7 +81,7 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
 <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
     用户名或邮箱：<input type="text" name="userName"/>
     <?php echo "<span class=error>".$error1."</span>";?><br/>
-    您的登陆密码：<input type="text" name="password"/>
+    您的登陆密码：<input type="password" name="password"/>
     <?php echo "<span class=error>".$error2."</span>";?><br/>
     <input type="submit" value="登陆"/>
 </form>
@@ -90,12 +91,13 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
 
 <?php
     if($isLogin) {
-        if($test2==true) {
+        if($test2==true) { // 若用户使用邮箱登陆，则需要通过输入的邮箱在数据库表中找到对应的用户昵称
             $sql = "select user_name from t_user where email='$userName'";
             $result=mysqli_query($connect,$sql);
             $row=mysqli_fetch_array($result);
             $userName=$row['user_name'];
         }
         echo "登陆成功！欢迎您，$userName ！";
+        $_SESSION['userNameTemp']=$userName;
     }
 ?>

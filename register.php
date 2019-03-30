@@ -18,6 +18,11 @@
      * Function: 实现用户注册功能
      */
 
+        //转换html的空格字符
+        function replace_space($content){
+            $content = str_replace(' ', '&nbsp;', $content);
+            return $content;
+        }
         // 调用数据库文件
         include 'connection.php';
         // 防止报错，初始化用户输入变量
@@ -59,7 +64,8 @@
             if (trim($_POST['gender']) == '男' | trim($_POST['gender']) == '女') {
                 $gender = trim($_POST['gender']); // 自动屏蔽性别中的空格
             } else {
-                $error3  = '请正确输入您的性别(男或女)';
+                $error3='                    请选择您的性别';
+                $error3=replace_space($error3);
                 $isEmpty = false;
             }
             // 检测用户密码是否为空
@@ -105,7 +111,8 @@
             //引用数据库连接文件
 
             // 编写一句SQL将用户注册信息插入到数据库的表中
-            $sql = "INSERT INTO t_user (`user_name`, `email`, `password`, `gender`, `register_time`) values ('$userName', '$email', '$password', '$gender', curdate())";
+            $sql = "INSERT INTO t_user (`user_name`, `email`, `password`, `gender`, `register_time`) 
+                    values ('$userName', '$email', '$password', '$gender', curdate())";
             // 将数据输入到数据库中
             if (mysqli_query($connect, $sql)) {
                 // echo '注册成功';    // echo '插入数据成功';
@@ -120,11 +127,12 @@
         <?php echo "<span class=error>".$error1."</span>";?><br/>
         常用邮箱：<input type="text" name="email"/>
         <?php echo "<span class=error>".$error2."</span>";?><br/>
-        您的性别：<input type="text" name="gender"/>
+        您的性别：<input type="radio" name="gender" value="男"/>男
+                  <input type="radio" name="gender" value="女"/>女
         <?php echo "<span class=error>".$error3."</span>";?><br/>
-        注册密码：<input type="text" name="password"/>
+        注册密码：<input type="password" name="password"/>
         <?php echo "<span class=error>".$error4."</span>";?><br/>
-        确认密码：<input type="text" name="repassword"/>
+        确认密码：<input type="password" name="repassword"/>
         <?php echo "<span class=error>".$error5."</span>";?><br/>
         <input type="submit" value="注册"/>
     </form>
@@ -137,6 +145,7 @@ if($isEmpty)
 {
     echo '注册成功！<br/>';
     echo "您的用户名：".$userName."<br/>";
-    echo '注册为：'.date('Y-m-d- h:i:s').'<br />';
+    echo '注册时间为：'.date('Y-m-d- h:i:s').'<br />';
+    echo '<a href="test1.php"><input type="button" value="完善个人资料"/></a>';
 }
 ?>
