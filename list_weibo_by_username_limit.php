@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>查询微博</title>
+    <title>根据用户名查询分页模块</title>
     <style>
         .tips{color:blue;}
     </style>
@@ -13,27 +13,16 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2019/3/27
- * Time: 18:57
- * Func: 按用户名查询微博
+ * Date: 2019/4/2
+ * Time: 22:08
+ * Func: 根据用户名查询微博分页模块
  */
     error_reporting(E_ALL ^ E_NOTICE);
     include 'connection.php';
     session_start();
-    $userName   = $_SESSION['userNameTemp'];
-    $isManager = $_SESSION['isManager'];
+    $userName=$_SESSION['searchUserNameTemp'];
+    // echo $userName;
 
-    echo "<br><a href='list_weibo_by_type.php'><input type='button' value='根据类型查找我的微博'></a>&nbsp;";
-    echo "<a href='list_weibo_by_keyword.php'><input type='button' value='根据关键字查找我的微博'></a>&nbsp;";
-    // 检测用户是否为管理员
-    if ($isManager == 0) {
-        echo "<a href='temp.php'><input type='button' value='返回菜单'/></a><br>";
-    } else {
-        echo "<a href='temp_m.php'><input type='button' value='返回菜单'/></a><br>";
-    }
-?>
-
-<?php
     // 翻页模块
     // 定义每一页显示多少条微博
     $pageSize = 3;
@@ -48,8 +37,8 @@
     // 计算总页数
     if ($num%$pageSize==0){
         $pagenum=$num/$pageSize;
-    }else{
-        $pagenum=(int)($num/$pageSize)+1;
+    }else {
+        $pagenum = (int)($num / $pageSize) + 1;
     }
     // 翻页公式
     if ($_GET['page']) {
@@ -58,7 +47,7 @@
         $page    .= ',';
     }
     // 判断是否为第一页
-    if ($num > $pageSize) {
+      if ($num > $pageSize) {
         if ($pageval <= 1) {
             $pageval = 1;
             echo "<br />共 <span class='tips'>$num</span> 条微博 第 <span class='tips'>$pageval</span> 页 | 共 <span class='tips'>$pagenum</span> 页";
@@ -75,26 +64,29 @@
     }
 ?>
 
-<table width=500 border="0" cellpadding="5" cellspacing="1" bgcolor="#add3ef">
+<?php
+    echo "<a href=\"list_weibo_by_username.php\"><input type=\"button\" value=\"继续查找\"/></a>&nbsp;";
+    echo "<a href='temp_m.php'><input type='button' value='返回菜单'/></a><br><br>";
+?>
 
+<table width="500" border="0" cellpadding="5" cellspacing="1" bgcolor="#add3ef">
     <?php
-    $sql    = "select * from t_weibo_record where user_name='$userName' limit $page $pageSize";
-    $result = mysqli_query($connect, $sql);
-    while ($row = mysqli_fetch_array($result)) {
+        $sql="select * from t_weibo_record where user_name='$userName' limit $page $pageSize";
+        $result=mysqli_query($connect,$sql);
+        while($row=mysqli_fetch_array($result)) {
     ?>
-        <tr bgcolor="#eff3ff">
-            <td>类型：<?= $row['weibo_type']; ?> </td>
-        </tr>
-        <tr bgcolor="#ffffff">
-            <td>正文：<?= $row['weibo_content']; ?> </td>
-        </tr>
-        <tr bgcolor="#ffffff">
-            <td><a href="delete.php?id=<?= $row['id']; ?>"><input type="button" value="删除微博"/></a></td>
-        </tr>
-    <?
-    }
+            <tr bgcolor="#eff3ff">
+                <td>类型：<?= $row['weibo_type']; ?> </td>
+            </tr>
+            <tr bgcolor="#ffffff">
+                <td>正文：<?= $row['weibo_content']; ?> </td>
+            </tr>
+            <tr bgcolor="#ffffff">
+                <td><a href="delete_m.php?id=<?=$row['id']; ?>"><input type="button" value="删除微博"/></a></td>
+            </tr>
+    <?php
+        }
     ?>
-
 </table>
 </body>
 </html>

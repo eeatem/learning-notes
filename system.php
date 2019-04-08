@@ -13,27 +13,23 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2019/3/27
- * Time: 18:57
- * Func: 按用户名查询微博
+ * Date: 2019/3/31
+ * Time: 2:31
+ * Func: 微博管理系统
  */
     error_reporting(E_ALL ^ E_NOTICE);
     include 'connection.php';
     session_start();
-    $userName   = $_SESSION['userNameTemp'];
-    $isManager = $_SESSION['isManager'];
 
-    echo "<br><a href='list_weibo_by_type.php'><input type='button' value='根据类型查找我的微博'></a>&nbsp;";
-    echo "<a href='list_weibo_by_keyword.php'><input type='button' value='根据关键字查找我的微博'></a>&nbsp;";
-    // 检测用户是否为管理员
-    if ($isManager == 0) {
-        echo "<a href='temp.php'><input type='button' value='返回菜单'/></a><br>";
-    } else {
-        echo "<a href='temp_m.php'><input type='button' value='返回菜单'/></a><br>";
-    }
+    echo "<a href='list_weibo_by_username.php'><input type='button' value='根据用户名查找微博'></a>&nbsp;";
+    echo "<a href='list_weibo_by_type.php'><input type='button' value='根据类型查找微博'></a>&nbsp;";
+    echo "<a href='list_weibo_by_keyword.php'><input type='button' value='根据关键字查找微博'></a>&nbsp;";
+    echo "<a href='temp_m.php'><input type='button' value='返回菜单'/></a><br>";
+
 ?>
 
 <?php
+
     // 翻页模块
     // 定义每一页显示多少条微博
     $pageSize = 3;
@@ -42,14 +38,14 @@
     $url = parse_url($url);
     $url = $url['path'];
     // 获取微博总条数
-    $sql    = "select * from t_weibo_record where user_name='$userName'";
+    $sql    = "select * from t_weibo_record ";
     $result = mysqli_query($connect, $sql);
     $num    = mysqli_num_rows($result);
     // 计算总页数
     if ($num%$pageSize==0){
         $pagenum=$num/$pageSize;
-    }else{
-        $pagenum=(int)($num/$pageSize)+1;
+    }else {
+        $pagenum = (int)($num / $pageSize) + 1;
     }
     // 翻页公式
     if ($_GET['page']) {
@@ -73,28 +69,30 @@
             echo "&nbsp;<a href=$url?page=" . ($pageval + 1) . "><input type='button' value='下一页'/></a>";
         }
     }
+
 ?>
 
 <table width=500 border="0" cellpadding="5" cellspacing="1" bgcolor="#add3ef">
 
     <?php
-    $sql    = "select * from t_weibo_record where user_name='$userName' limit $page $pageSize";
+    $sql    = "select * from t_weibo_record limit $page $pageSize";
     $result = mysqli_query($connect, $sql);
     while ($row = mysqli_fetch_array($result)) {
-    ?>
+        ?>
         <tr bgcolor="#eff3ff">
-            <td>类型：<?= $row['weibo_type']; ?> </td>
+            <td>发送人：<?= $row['user_name']; ?> —— 类型：<?= $row['weibo_type']; ?></td>
         </tr>
         <tr bgcolor="#ffffff">
             <td>正文：<?= $row['weibo_content']; ?> </td>
         </tr>
         <tr bgcolor="#ffffff">
-            <td><a href="delete.php?id=<?= $row['id']; ?>"><input type="button" value="删除微博"/></a></td>
+            <td><a href="delete_m.php?id=<?= $row['id']; ?>"><input type="button" value="删除微博"/></a></td>
         </tr>
-    <?
+        <?
     }
     ?>
 
 </table>
 </body>
 </html>
+
