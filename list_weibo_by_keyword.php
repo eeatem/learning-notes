@@ -47,7 +47,7 @@
 ?>
 
 <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-    <br>请输入微博正文关键字：<br><input type="text" name="keyWord"/>&nbsp;<input type="submit" value="确认"/>
+    请输入微博正文关键字：<br><input type="text" name="keyWord"/>&nbsp;<input type="submit" value="确认"/>
 
     <?php
         // 提交表单后 且 满足查找条件后才生成‘查找按钮’

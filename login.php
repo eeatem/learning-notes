@@ -20,7 +20,9 @@
  */
     error_reporting(E_ALL ^ E_NOTICE);
     include 'connection.php';
+    include 'function.php';
     session_start();
+    $checkCode=$_SESSION['checkCode'];
 
     // 该bool用于判断用户输入信息是否符合要求
     $isEmpty=false;
@@ -28,13 +30,6 @@
     $isLogin=false;
     //
     $isRegister=true;
-    // 防止报错，初始化用户输入变量
-    $userName = '';
-    $email    = '';
-    $password = '';
-    // 防止报错，初始化错误信息变量
-    $error1 = '*';
-    $error2 = '*';
 
     if($_SERVER['REQUEST_METHOD']=="POST") {
         $isEmpty = true;
@@ -51,6 +46,12 @@
             $isEmpty = false;
         } else {
             $password = md5($_POST['password']); //用于将用户输入的密码与数据库表中注册时已通过md5加密的密码进行匹配对比
+        }
+        // 检测用户输入的验证码是否正确
+        if ($_POST['checkCode']!=$checkCode){
+            $isEmpty=false;
+            $error3='                           *请输入正确的验证码';
+            $error3=html_replace_space($error3);
         }
         // 检测用户名或注册邮箱是否存在
         if ($isEmpty) {
@@ -88,7 +89,11 @@
     <?php if($isRegister==false){echo "<a href='register.php'>注册</a>";} ?><br/>
     您的登陆密码：<input type="password" name="password"/>
     <?php echo "<span class=error>".$error2."</span>";?><br/>
+    验证码&emsp;&emsp;&emsp;：<input size="2" type="text" name="checkCode"/>
+    <?php echo "<span class=error>" . $error3 . "</span>"; ?><br/>
+    <img src="check_code.php"><br>
     <input type="submit" value="登陆"/>
+
 </form>
 </body>
 </html>

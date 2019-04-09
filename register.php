@@ -21,29 +21,13 @@
  */
     error_reporting(E_ALL ^ E_NOTICE);
     session_start();
-    // 转换html的空格字符
-    function html_replace_space($content)
-    {
-        $content = str_replace(' ', '&nbsp;', $content);
-        return $content;
-    }
+    $checkCode=$_SESSION['checkCode'];
+    include 'function.php';
 
     // 调用数据库文件
     include 'connection.php';
-    // 防止报错，初始化用户输入变量
-    $userName = '';
-    $email    = '';
-    $password = '';
-    $gender   = '';
-    // 防止报错，初始化错误信息变量
-    $error1 = '';
-    $error2 = '';
-    $error3 = '';
-    $error4 = '';
-    $error5 = '';
     // 该bool用于判断用户输入信息是否符合要求
     $isEmpty = false;
-
     // 该模块用于检测用户输入的注册信息是否都符合要求
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $isEmpty = true;
@@ -94,6 +78,12 @@
         } else {
             $password = md5($_POST['password']);
         }
+        // 检测用户输入的验证码是否正确
+        if ($_POST['checkCode']!=$checkCode) {
+            $error6  = '                           *请输入正确的验证码';
+            $error6=html_replace_space($error6);
+            $isEmpty = false;
+        }
     }
 
     // 检测用户名是否被占用
@@ -140,6 +130,9 @@
     <?php echo "<span class=error>" . $error4 . "</span>"; ?><br/>
     确认密码：<input type="password" name="repassword"/>
     <?php echo "<span class=error>" . $error5 . "</span>"; ?><br/>
+    验证码&emsp;：<input size="2" type="text" name="checkCode"/>
+    <?php echo "<span class=error>" . $error6 . "</span>"; ?><br/>
+    <img src="check_code.php"><br>
     <input type="submit" value="注册"/>
 </form>
 

@@ -14,7 +14,7 @@
     <title>菜单</title>
 </head>
 <body>
-    <br><a href="sent_weibo.php"><input type="button" value="发微博"/></a>
+    <a href="sent_weibo.php"><input type="button" value="发微博"/></a>
     <a href="list_weibo.php"><input type="button" value="浏览我的微博"/></a>
     <a href="list_introduce.php"><input type="button" value="查看个人资料"/></a>
     <a href="logout.php"><input type="submit" value="注销当前账户"/></a>

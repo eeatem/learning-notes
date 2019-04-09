@@ -11,7 +11,7 @@
     session_unset();
     session_destroy();
 
-    echo '<br />'.'账户注销成功！欢迎您下次使用本系统！';
+    echo '账户注销成功！欢迎您下次使用本系统！';
     echo "<a href='home.php'><input type='button' value='返回首页'/></a>";
 
 ?>

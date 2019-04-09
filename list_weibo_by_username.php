@@ -45,7 +45,7 @@
 ?>
 
 <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-    请输入用户名：<br><input type="text" name="userName"/>&nbsp;<input type="submit" value="确认"/>
+    请输入用户名：<input type="text" name="userName"/>&nbsp;<input type="submit" value="确认"/>
     <?php
         // 提交表单后 且 满足查找条件后才生成‘查找按钮’
         if($_SERVER['REQUEST_METHOD']=="POST" && $isSearch==true){
