@@ -30,6 +30,31 @@
     $userName              = $_SESSION['userNameTemp'];
     $weiboType             = $_POST['weiboType'];
     $_SESSION['weiboType'] = $weiboType;
+
+    // 判断是否能够进行查找
+    $isSearch=true;
+    if($_SERVER['REQUEST_METHOD']=="POST") {
+        if(empty($weiboType)){
+            $isSearch=false;
+        }
+        if ($isManager == 1) {
+            if ($weiboType == '所有类型') {
+                $sql = "select * from t_weibo_record";
+            } else {
+                $sql = "select * from t_weibo_record where weibo_type='$weiboType'";
+            }
+        } else {
+            if ($weiboType == '所有类型') {
+                $sql = "select * from t_weibo_record where user_name='$userName'";
+            } else {
+                $sql = "select * from t_weibo_record where user_name='$userName' and weibo_type='$weiboType'";
+            }
+        }
+        $result=mysqli_query($connect,$sql);
+        if(!mysqli_fetch_array($result)){
+            $isSearch=false;
+        }
+    }
 ?>
 
 <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
@@ -44,7 +69,11 @@
         <option value="体育">体育</option>
     </select>
     <input type="submit" value="选择"/>
-    <a href="test3.php"><input type="button" value="查询"></a>
+    <?php
+        if($_SERVER['REQUEST_METHOD']=="POST" && $isSearch==true){
+            echo "<a href='list_weibo_by_type_limit.php'><input type='button' value='查找'></a>";
+        }
+    ?>
 
     <?php
         if ($isManager == 0) {

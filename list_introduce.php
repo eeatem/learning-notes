@@ -5,7 +5,7 @@
  * Date: 2019/3/30
  * Time: 15:45
  */
-    error_reporting(E_ALL ^ E_NOTICE);
+    // error_reporting(E_ALL ^ E_NOTICE);
     include 'connection.php';
     session_start();
     $userName=$_SESSION['userNameTemp'];

@@ -91,7 +91,7 @@
         <tr bgcolor="#ffffff">
             <td><a href="delete.php?id=<?= $row['id']; ?>"><input type="button" value="删除微博"/></a></td>
         </tr>
-    <?
+    <?php
     }
     ?>
 

@@ -89,7 +89,7 @@
     <?php if($isRegister==false){echo "<a href='register.php'>注册</a>";} ?><br/>
     您的登陆密码：<input type="password" name="password"/>
     <?php echo "<span class=error>".$error2."</span>";?><br/>
-    验证码&emsp;&emsp;&emsp;：<input size="2" type="text" name="checkCode"/>
+    验证码&emsp;&emsp;&emsp;：<input size="5" type="text" name="checkCode"/>
     <?php echo "<span class=error>" . $error3 . "</span>"; ?><br/>
     <img src="check_code.php"><br>
     <input type="submit" value="登陆"/>
