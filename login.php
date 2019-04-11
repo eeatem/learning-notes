@@ -118,15 +118,11 @@
         $_SESSION['isManager']=$isManager;
 
         if($isManager==0) {
-            echo "登陆成功！欢迎您，用户 <span class='tips'>$userName</span> ！ <br />";
-            echo "<a href='sent_weibo.php'><input type='button' value='发微博'/></a>&nbsp;";
-            echo "<a href='list_weibo.php'><input type='button' value='浏览我的微博'/></a>&nbsp;";
-            echo "<a href='list_introduce.php'><input type='button' value='查看个人资料'/></a>";
+            echo "登陆成功！欢迎您，用户 <span class='tips'>&nbsp;$userName</span> ！";
+            echo "<a href='temp.php'><input type='button' value='进入微博系统'/></a>";
         }else{
-            echo "登陆成功！欢迎您，管理员 <span class='tips'>$userName</span> ！ <br />";
-            echo "<a href='sent_weibo.php'><input type='button' value='发微博'/></a>&nbsp;";
-            echo "<a href='list_introduce.php'><input type='button' value='查看个人资料'/></a>&nbsp;";
-            echo "<a href='system.php'><input type='button' value='微博管理系统'/></a>&nbsp;";
+            echo "登陆成功！欢迎您，管理员 <span class='tips'>$userName</span> ！";
+            echo "<a href='temp_m.php'><input type='button' value='进入微博系统'></a>";
         }
     }
 ?>

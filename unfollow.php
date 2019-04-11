@@ -2,9 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>关注用户</title>
+    <title>取消关注</title>
     <style>
-        .tips{color:blue;}
+        .error{color:red;}
     </style>
 </head>
 <body>
@@ -14,19 +14,19 @@
  * Created by PhpStorm.
  * User: eeatem
  * Date: 2019-04-11
- * Time: 23:25
- * Func：关注用户模块
+ * Time: 23:37
+ * Func: 取消关注用户模块
  */
     include 'connection.php';
     session_start();
     $uId=$_SESSION['uIdTemp'];
     $fId=$_SESSION['fIdTemp'];
     $searchUser=$_SESSION['searchUserTemp'];
-    // 插入关注信息
-    $sql = "insert into t_follow values ('$uId','$fId')";
-    $followResult=mysqli_query($connect, $sql);
-    if($followResult) {
-        echo "您已成功关注用户：<span class='tips'>$searchUser</span>！<br>";
+    // 删除关注信息
+    $sql="delete from t_follow where `user_id`='$uId' and `follow_id`='$fId'";
+    $deleteResult=mysqli_query($connect,$sql);
+    if($deleteResult){
+        echo "您已成功取消关注用户：<span class='error'>$searchUser</span>！<br>";
     }
     // 返回菜单
     echo "<a href='search_user.php'><input type='button' value='返回'/></a>";
