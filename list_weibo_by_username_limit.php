@@ -76,7 +76,7 @@
         while($row=mysqli_fetch_array($result)) {
     ?>
             <tr bgcolor="#eff3ff">
-                <td>类型：<?= $row['weibo_type']; ?> </td>
+                <td>类型：<?= $row['weibo_type']; ?> —— 点赞数：<?= $row['praise']; ?></td>
             </tr>
             <tr bgcolor="#ffffff">
                 <td>正文：<?= $row['weibo_content']; ?> </td>

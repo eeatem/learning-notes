@@ -23,7 +23,7 @@
     session_start();
     $userName=$_SESSION['followUserTemp'];
     $isManager=$_SESSION['isManager'];
-    $keyWord=$_POST['keyWord'];
+    $keyWord=trim($_POST['keyWord']);
     $keyWordTemp=$keyWord;
     $keyWord="%$keyWord%";
     $_SESSION['keyWord']=$keyWord;
@@ -33,7 +33,7 @@
     // 判断是否能够进行查询
     $isSearch=true;
     if($_SERVER['REQUEST_METHOD']=="POST"){
-        if(empty($_POST['keyWord'])){
+        if(empty(trim($_POST['keyWord']))){
             $isSearch=false;
         }
         if($isManager==1) {
@@ -74,8 +74,7 @@
             echo "即将查找关键字包含: <span class='tips'>$keyWordTemp</span> 的已发微博！";
         }else if($_SERVER['REQUEST_METHOD']=="POST" && !mysqli_fetch_array($result)){
             echo "<span class='error'>不存在任何关键字为: <span class='tips'>$keyWordTemp</span> 的微博，请重新输入！</span>";
-        }
-        if($_SERVER['REQUEST_METHOD']=="POST" && empty($keyWordTemp)){
+        }else if($_SERVER['REQUEST_METHOD']=="POST" && empty($keyWordTemp)){
             echo "<span class='error'>关键字不能为空，请重新输入！</span>";
         }
     ?>

@@ -92,7 +92,6 @@
 
     <?php
         // if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        if ($isManager == 0) {
             if ($weiboType == '所有类型') {
                 $sql = "select * from t_weibo_record where user_name='$userName' limit $page $pageSize";
             } else {
@@ -103,7 +102,7 @@
             while ($row = mysqli_fetch_array($result)) {
             ?>
                 <tr bgcolor="#eff3ff">
-                    <td>类型：<?= $row['weibo_type']; ?> </td>
+                    <td>类型：<?= $row['weibo_type']; ?> —— 点赞数：<?= $row['praise']; ?>&emsp;<a href="like_nlwbt.php?id=<?= $row['id']; ?>"><input type="button" value="点赞"></a></td>
                 </tr>
                 <tr bgcolor="#ffffff">
                     <td>正文：<?= $row['weibo_content']; ?> </td>
@@ -114,26 +113,6 @@
             <?php
             }
         ?>
-
-        <?
-        } else {
-            if ($weiboType == '所有类型') {
-                $sql = "select * from t_weibo_record limit $page $pageSize";
-            } else {
-                $sql = "select * from t_weibo_record where weibo_type='$weiboType' limit $page $pageSize";
-            }
-            $result = mysqli_query($connect, $sql);
-            while ($row = mysqli_fetch_array($result)) {
-            ?>
-            <tr bgcolor="#eff3ff">
-                <td>发送人：<?= $row['user_name']; ?> —— 类型：<?= $row['weibo_type']; ?></td>
-            </tr>
-            <tr bgcolor="#ffffff">
-                <td>正文：<?= $row['weibo_content']; ?> </td>
-            </tr>
-            <?php
-           }
-        }
     // }
             ?>
 </table>

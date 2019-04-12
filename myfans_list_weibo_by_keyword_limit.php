@@ -84,14 +84,13 @@
     <table width="500" border="0" cellpadding="5" cellspacing="1" bgcolor="#add3ef">
         <?php
         // if($_SERVER['REQUEST_METHOD']=="POST") {
-            if ($isManager == 0) {
                 $sql    = "select * from t_weibo_record where user_name='$userName'
                   and weibo_content like '$keyWord' limit $page $pageSize";
                 $result = mysqli_query($connect, $sql);
                 while ($row = mysqli_fetch_array($result)) {
                     ?>
                     <tr bgcolor="#eff3ff">
-                        <td>类型：<?= $row['weibo_type']; ?> </td>
+                        <td>类型：<?= $row['weibo_type']; ?> —— 点赞数：<?= $row['praise']; ?>&emsp;<a href="like_nlwbk.php?id=<?= $row['id']; ?>"><input type="button" value="点赞"></a></td>
                     </tr>
                     <tr bgcolor="#ffffff">
                         <td>正文：<?= $row['weibo_content']; ?> </td>
@@ -99,24 +98,9 @@
                     <tr bgcolor="#ffffff">
                         <td><a href="delete.php?id=<?=$row['id']; ?>"><input type="button" value="删除微博"/></a></td>
                     </tr>
-                    <?php
+                <?php
                 }
-            } else {
-                $sql    = "select * from t_weibo_record where weibo_content like '$keyWord' limit $page $pageSize";
-                $result = mysqli_query($connect, $sql);
-                while ($row = mysqli_fetch_array($result)) {
-                    ?>
-                    <tr bgcolor="#eff3ff">
-                        <td>发送人：<?= $row['user_name']; ?> —— 类型：<?= $row['weibo_type']; ?></td>
-                    </tr>
-                    <tr bgcolor="#ffffff">
-                        <td>正文：<?= $row['weibo_content']; ?> </td>
-                    </tr>
-                    <?php
-                }
-            }
-        // }
-        ?>
+                ?>
 
     </table>
 </form>
