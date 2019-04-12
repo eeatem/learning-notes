@@ -4,6 +4,7 @@
  * User: eeatem
  * Date: 2019-04-12
  * Time: 14:34
+ * Func: 我的关注过渡页面
  */
     session_start();
     $_SESSION['followUserTemp']=$_GET['userName'];
