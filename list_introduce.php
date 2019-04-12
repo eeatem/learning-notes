@@ -26,6 +26,7 @@
     echo '兴趣爱好：'.$row['hobby1'].$row['hobby2'].$row['hobby3'].$row['hobby4'].$row['hobby5'].$row['hobby6'].'<br />'.'<br />';
     echo '个性签名： '.$row['label'].'<br />'.'<br />';
     echo '个人简介： '.$row['introduce'].'<br />'.'<br />';
+    echo '访问次数： '.$row['visits'].'<br />'.'<br />';
 
     echo "<a href='edit_introduce.php'><input type='button' value='修改个人资料'></a>&nbsp;";
     if($isManager==0){

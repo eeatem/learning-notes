@@ -20,6 +20,17 @@
     $sql="select * from t_introduce where user_name='$userName' and id=(select max(id) from t_introduce where user_name='$userName')";
     $result=mysqli_query($connect,$sql);
     $row=mysqli_fetch_array($result);
+    // 若查看个人资料成功，增加访问次数
+    if($row){
+        $sql="select * from t_introduce where user_name='$userName' and id=(select max(id) from t_introduce where user_name='$userName')";
+        $result=mysqli_query($connect,$sql);
+        $row1=mysqli_fetch_array($result);
+        $lateId=$row1['id'];
+        $time=++$row1['visits'];
+        // echo $time;
+        $sql="update t_introduce set visits='$time' where id='$lateId'";
+        mysqli_query($connect,$sql);
+    }
 
     echo '注册日期： '.$date.'<br />'.'<br />';
     echo '出生年月： '.$row['birthday_year'].'年'.$row['birthday_month'].'月'.'<br />'.'<br />';
