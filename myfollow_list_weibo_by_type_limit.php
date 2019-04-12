@@ -14,15 +14,15 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Administrator
- * Date: 2019/3/27
- * Time: 20:46
- * Func: 根据微博类型查询微博
+ * User: eeatem
+ * Date: 2019-04-12
+ * Time: 13:48
+ * Func: 通过类型查找我的关注用户的微博分页模块
  */
     error_reporting(E_ALL ^ E_NOTICE);
     include 'connection.php';
     session_start();
-    $userName  = $_SESSION['userNameTemp'];
+    $userName  = $_SESSION['followUserTemp'];
     $isManager = $_SESSION['isManager'];
     $weiboType = $_SESSION['weiboType'];
 
@@ -80,7 +80,7 @@
 ?>
 
 <?php
-    echo "<a href='list_weibo_by_type.php'><input type=\"button\" value=\"继续查找\"/></a>&nbsp;";
+    echo "<a href='myfollow_list_weibo_by_type.php'><input type=\"button\" value=\"继续查找\"/></a>&nbsp;";
     if ($isManager == 1) {
         echo "<a href='temp_m.php'><input type='button' value='返回菜单'/></a><br><br>";
     } else {
@@ -130,9 +130,6 @@
             </tr>
             <tr bgcolor="#ffffff">
                 <td>正文：<?= $row['weibo_content']; ?> </td>
-            </tr>
-            <tr bgcolor="#ffffff">
-                <td><a href="delete_m.php?id=<?= $row['id']; ?>"><input type="button" value="删除微博"/></a></td>
             </tr>
             <?php
            }

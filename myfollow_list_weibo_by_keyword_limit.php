@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
@@ -12,15 +12,15 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Administrator
- * Date: 2019/4/3
- * Time: 1:03
- * Func: 根据正文关键字查询微博分页模块
+ * User: eeatem
+ * Date: 2019-04-12
+ * Time: 17:54
+ * Func: 通过正文关键字查找我关注的用户的微博分页模块
  */
     error_reporting(E_ALL ^ E_NOTICE);
     include 'connection.php';
     session_start();
-    $userName=$_SESSION['userNameTemp'];
+    $userName=$_SESSION['followUserTemp'];
     $isManager=$_SESSION['isManager'];
     $keyWord=$_SESSION['keyWord'];
     // echo $userName;
@@ -73,11 +73,11 @@
 ?>
 
 <?php
-    echo "<br><a href='list_weibo_by_keyword.php'><input type='button' value='继续查找'/></a>&nbsp;";
+    echo "<br><a href='myfollow_list_weibo_by_keyword.php'><input type='button' value='继续查找'/></a>&nbsp;";
     if($isManager==1) {
-        echo "<a href='temp_m.php'><input type='button' value='返回菜单'/></a><br><br>";
+        echo "<a href='temp_m.php'><input type='button' value='返回菜单'/></a><br>";
     }else{
-        echo "<a href='temp.php'><input type='button' value='返回菜单'/></a><br><br>";
+        echo "<a href='temp.php'><input type='button' value='返回菜单'/></a><br>";
     }
 ?>
 
@@ -111,9 +111,6 @@
                     </tr>
                     <tr bgcolor="#ffffff">
                         <td>正文：<?= $row['weibo_content']; ?> </td>
-                    </tr>
-                    <tr bgcolor="#ffffff">
-                        <td><a href="delete_m.php?id=<?=$row['id']; ?>"><input type="button" value="删除微博"/></a></td>
                     </tr>
                     <?php
                 }

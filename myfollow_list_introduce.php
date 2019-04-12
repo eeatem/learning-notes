@@ -2,25 +2,15 @@
 /**
  * Created by PhpStorm.
  * User: eeatem
- * Date: 2019-04-11
- * Time: 18:48
+ * Date: 2019-04-12
+ * Time: 14:40
+ * Func: 显示我关注的用户的个人资料
  */
     error_reporting(E_ALL ^ E_NOTICE);
     include 'connection.php';
     session_start();
-    $userName=$_SESSION['searchUserTemp'];
+    $userName=$_SESSION['followUserTemp'];
     $isManager=$_SESSION['isManager'];
-    $uId=$_SESSION['uIdTemp'];
-    $fId=$_SESSION['fIdTemp'];
-    // 检测关注者是否已经关注被关注者
-    $isFollowed = false;
-    $sql = "select * from t_follow where `user_id`='$uId'";
-    $result = mysqli_query($connect, $sql);
-    while ($row = mysqli_fetch_array($result)) {
-        if ($row['follow_id'] == $fId) {
-            $isFollowed = true;
-        }
-    }
     // 获取用户注册时间
     $sql="select * from t_user where user_name='$userName'";
     $result=mysqli_query($connect,$sql);
@@ -38,12 +28,7 @@
     echo '个性签名： '.$row['label'].'<br />'.'<br />';
     echo '个人简介： '.$row['introduce'].'<br />'.'<br />';
 
-    if(!$isFollowed) {
-        echo "<a href='follow.php'><input type='button' value='关注'/></a>";
-    }else{
-        echo "<a href='unfollow.php'><input type='button' value='取消关注'></a>";
-    }
-    echo "<a href='search_user.php'><input type='button' value='继续查找'/></a>";
+    echo "<a href='myfollow.php'><input type='button' value='返回'/></a>";
     if($isManager==0) {
         echo "<a href='temp.php'><input type='button' value='返回菜单'/></a>";
     }else{

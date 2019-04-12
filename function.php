@@ -22,5 +22,4 @@
         $content = str_replace(' ', '&nbsp;', $content);
         return $content;
     }
-
 ?>

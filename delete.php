@@ -8,8 +8,8 @@
  */
     include 'connection.php';
     $id=$_GET['id'];
-    // echo $id;
-
+     echo $id;
+    // 删除微博
     $sql="delete from t_weibo_record where id='$id'";
     mysqli_query($connect,$sql);
     echo '微博删除成功！';

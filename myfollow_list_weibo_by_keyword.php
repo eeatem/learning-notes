@@ -13,20 +13,22 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Administrator
- * Date: 2019/3/31
- * Time: 2:53
- * Func: 根据正文关键字查询微博
+ * User: eeatem
+ * Date: 2019-04-12
+ * Time: 17:54
+ * Func: 通过正文关键字查找我关注的用户的微博
  */
     error_reporting(E_ALL ^ E_NOTICE);
     include 'connection.php';
     session_start();
-    $userName=$_SESSION['userNameTemp'];
+    $userName=$_SESSION['followUserTemp'];
     $isManager=$_SESSION['isManager'];
     $keyWord=$_POST['keyWord'];
     $keyWordTemp=$keyWord;
     $keyWord="%$keyWord%";
     $_SESSION['keyWord']=$keyWord;
+    // echo $userName;
+    // echo $keyWord;
 
     // 判断是否能够进行查询
     $isSearch=true;
@@ -52,7 +54,7 @@
     <?php
         // 提交表单后 且 满足查找条件后才生成‘查找按钮’
         if($_SERVER['REQUEST_METHOD']=="POST" && $isSearch==true){
-            echo "<a href='list_weibo_by_keyword_limit.php'><input type='button' value='查找'/></a>";
+            echo "<a href='myfollow_list_weibo_by_keyword_limit.php'><input type='button' value='查找'/></a>";
         }
     ?>
 

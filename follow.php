@@ -29,7 +29,7 @@
         echo "您已成功关注用户：<span class='tips'>$searchUser</span>！<br>";
     }
     // 返回菜单
-    echo "<a href='search_user.php'><input type='button' value='返回'/></a>";
+    echo "<a href='search_user.php'><input type='button' value='继续查找'/></a>";
     if($isManager==0) {
         echo "<a href='temp.php'><input type='button' value='返回菜单'/></a><br>";
     }else{

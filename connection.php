@@ -18,6 +18,5 @@
     }
     // 使用utf8字符集防止乱码产生
     mysqli_set_charset($connect,DB_CHARSET);
-
 ?>
 

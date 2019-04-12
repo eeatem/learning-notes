@@ -12,28 +12,30 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Administrator
- * Date: 2019/3/27
- * Time: 18:57
- * Func: 按用户名查询微博
+ * User: eeatem
+ * Date: 2019-04-12
+ * Time: 13:20
+ * Func: 显示我关注的用户的微博
  */
     error_reporting(E_ALL ^ E_NOTICE);
     include 'connection.php';
     session_start();
-    $userName   = $_SESSION['userNameTemp'];
+    $userName=$_SESSION['followUserTemp'];
+    // echo $userName;
     $isManager = $_SESSION['isManager'];
 
-    echo "<br><a href='list_weibo_by_type.php'><input type='button' value='根据类型查找我的微博'></a>&nbsp;";
-    echo "<a href='list_weibo_by_keyword.php'><input type='button' value='根据关键字查找我的微博'></a>&nbsp;";
+    echo "<br><a href='myfollow_list_weibo_by_type.php'><input type='button' value='根据类型查找微博'></a>&nbsp;";
+    echo "<a href='myfollow_list_weibo_by_keyword.php'><input type='button' value='根据关键字查找微博'></a>&nbsp;";
+    echo "<a href='myfollow.php'><input type='button' value='返回'></a>";
     // 检测用户是否为管理员
     if ($isManager == 0) {
         echo "<a href='temp.php'><input type='button' value='返回菜单'/></a><br>";
     } else {
         echo "<a href='temp_m.php'><input type='button' value='返回菜单'/></a><br>";
     }
-?>
+    ?>
 
-<?php
+    <?php
     // 翻页模块
     // 定义每一页显示多少条微博
     $pageSize = 3;
@@ -87,9 +89,6 @@
         </tr>
         <tr bgcolor="#ffffff">
             <td>正文：<?= $row['weibo_content']; ?> </td>
-        </tr>
-        <tr bgcolor="#ffffff">
-            <td><a href="delete.php?id=<?= $row['id']; ?>"><input type="button" value="删除微博"/></a></td>
         </tr>
     <?php
         }

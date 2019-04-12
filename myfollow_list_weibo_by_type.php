@@ -18,16 +18,16 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Administrator
- * Date: 2019/3/27
- * Time: 20:46
- * Func: 根据微博类型查询微博
+ * User: eeatem
+ * Date: 2019-04-12
+ * Time: 13:48
+ * Func: 通过类型查找我的关注用户的微博
  */
     error_reporting(E_ALL ^ E_NOTICE);
     include 'connection.php';
     session_start();
     $isManager             = $_SESSION['isManager'];
-    $userName              = $_SESSION['userNameTemp'];
+    $userName              = $_SESSION['followUserTemp'];
     $weiboType             = $_POST['weiboType'];
     $_SESSION['weiboType'] = $weiboType;
 
@@ -71,11 +71,12 @@
     <input type="submit" value="选择"/>
     <?php
         if($_SERVER['REQUEST_METHOD']=="POST" && $isSearch==true){
-            echo "<a href='list_weibo_by_type_limit.php'><input type='button' value='查找'></a>";
+            echo "<a href='myfollow_list_weibo_by_type_limit.php'><input type='button' value='查找'></a>";
         }
     ?>
 
     <?php
+        echo "<a href='myfollow.php'><input type='button' value='返回'></a>";
         if ($isManager == 0) {
             echo "<a href='temp.php'><input type='button' value='返回菜单'/></a><br>";
         } else {

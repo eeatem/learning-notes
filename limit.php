@@ -45,5 +45,4 @@
             echo "<a href=$url?page=" . ($pageval + 1) . "><input type='button' value='下一页'/></a>";
         }
     }
-
 ?>

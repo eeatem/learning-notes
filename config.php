@@ -16,4 +16,4 @@
     define('DB_BASE', 'db_weibo');
     // 数据库编码字符集
     define('DB_CHARSET', 'utf8');
-
+?>
