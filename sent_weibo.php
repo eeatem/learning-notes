@@ -92,6 +92,13 @@
     // 若成功插入新的微博信息 且 微博正文不超过200字（汉字）
     if($result==true){
         echo '微博发送成功！';
+        // 发送成功则增加用户经验值
+        $sql="select * from t_user where user_name='$userName'";
+        $result=mysqli_query($connect,$sql);
+        $row=mysqli_fetch_array($result);
+        $exp=++$row['exp'];
+        $sql="update t_user set exp='$exp' where user_name='$userName'";
+        mysqli_query($connect,$sql);
     }else if($_SERVER['REQUEST_METHOD']=="POST"){
         $error0='微博发送失败！';
         echo "<span class='error'>$error0</span>";

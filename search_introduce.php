@@ -26,10 +26,26 @@
     $result=mysqli_query($connect,$sql);
     $row=mysqli_fetch_array($result);
     $date=$row['register_time'];
+    // 获取用户经验值
+    $sql="select * from t_user where user_name='$userName'";
+    $result=mysqli_query($connect,$sql);
+    $exp=mysqli_fetch_array($result);
+    $exp=$exp['exp'];
+    // 设定用户等级
+    if($exp<1){
+        $level='1级';
+    }else if($exp<3){
+        $level='2级';
+    }else if($exp<5){
+        $level='3级';
+    }else{
+        $level='4级';
+    }
     // 获取用户个人资料
     $sql="select * from t_introduce where user_name='$userName' and id=(select max(id) from t_introduce where user_name='$userName')";
     $result=mysqli_query($connect,$sql);
     $row=mysqli_fetch_array($result);
+
     // 若查看个人资料成功，增加访问次数
     if($row){
         $sql="select * from t_introduce where user_name='$userName' and id=(select max(id) from t_introduce where user_name='$userName')";
@@ -48,6 +64,7 @@
     echo '兴趣爱好：'.$row['hobby1'].$row['hobby2'].$row['hobby3'].$row['hobby4'].$row['hobby5'].$row['hobby6'].'<br />'.'<br />';
     echo '个性签名： '.$row['label'].'<br />'.'<br />';
     echo '个人简介： '.$row['introduce'].'<br />'.'<br />';
+    echo '微博等级： '.$level.'<br />'.'<br />';
 
     if(!$isFollowed) {
         echo "<a href='follow.php'><input type='button' value='关注'/></a>";
