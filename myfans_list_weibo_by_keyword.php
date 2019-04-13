@@ -70,7 +70,7 @@
             $sql="select * from t_weibo_record where user_name='$userName' and weibo_content like '$keyWord'";
         }
         $result = mysqli_query($connect, $sql);
-        if ($_SERVER['REQUEST_METHOD']=="POST" && mysqli_fetch_array($result) && !empty($keyWordTemp)) {
+        if ($_SERVER['REQUEST_METHOD']=="POST" && mysqli_fetch_array($result) && $keyWordTemp!='') {
             echo "即将查找关键字包含: <span class='tips'>$keyWordTemp</span> 的已发微博！";
         }else if($_SERVER['REQUEST_METHOD']=="POST" && !mysqli_fetch_array($result)){
             echo "<span class='error'>不存在任何关键字为: <span class='tips'>$keyWordTemp</span> 的微博，请重新输入！</span>";

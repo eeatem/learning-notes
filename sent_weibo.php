@@ -74,7 +74,7 @@
         <option value="体育">体育</option>
     </select><br>
     <!-- 微博正文输入文本框及其规格 -->
-    <textarea rows="10" cols="100" name="weiboContent"></textarea><br>
+    <textarea rows="10" cols="70" name="weiboContent"></textarea><br>
     <input type="submit" value="发送"/>
     <?php if($isManager==0){
         echo "<a href='temp.php'><input type='button' value='返回菜单'/></a>";

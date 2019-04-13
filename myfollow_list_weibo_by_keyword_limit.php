@@ -74,6 +74,7 @@
 
 <?php
     echo "<br><a href='myfollow_list_weibo_by_keyword.php'><input type='button' value='继续查找'/></a>&nbsp;";
+    echo "<a href='myfollow.php'><input type='button' value='返回'></a>";
     if($isManager==1) {
         echo "<a href='temp_m.php'><input type='button' value='返回菜单'/></a><br>";
     }else{

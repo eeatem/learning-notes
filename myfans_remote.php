@@ -35,7 +35,7 @@
     $sql="delete from t_follow where `user_id`='$fId' and `follow_id`='$uId'";
     $deleteResult=mysqli_query($connect,$sql);
     if($deleteResult){
-        echo "您已成功取消关注用户：<span class='error'>$followUser</span>！<br>";
+        echo "您已成功移除粉丝：<span class='error'>$followUser</span>！<br>";
     }
     // 返回菜单
     echo "<a href='myfans.php'><input type='button' value='返回'/></a>";

@@ -65,7 +65,7 @@
 ?>
 
 <?php
-    echo "<a href=\"list_weibo_by_username.php\"><input type=\"button\" value=\"继续查找\"/></a>&nbsp;";
+    echo "<br><a href=\"list_weibo_by_username.php\"><input type=\"button\" value=\"继续查找\"/></a>&nbsp;";
     echo "<a href='temp_m.php'><input type='button' value='返回菜单'/></a><br><br>";
 ?>
 

@@ -80,7 +80,8 @@
 ?>
 
 <?php
-    echo "<a href='myfans_list_weibo_by_type.php'><input type=\"button\" value=\"继续查找\"/></a>&nbsp;";
+    echo "<br><a href='myfans_list_weibo_by_type.php'><input type=\"button\" value=\"继续查找\"/></a>&nbsp;";
+    echo "<a href='myfans.php'><input type='button' value='返回'></a>";
     if ($isManager == 1) {
         echo "<a href='temp_m.php'><input type='button' value='返回菜单'/></a><br><br>";
     } else {
@@ -112,9 +113,8 @@
                 </tr>
             <?php
             }
-        ?>
-    // }
             ?>
+
 </table>
 </body>
 </html>

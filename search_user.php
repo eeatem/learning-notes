@@ -21,6 +21,7 @@
     include 'connection.php';
     session_start();
     $userName=$_SESSION['userNameTemp'];
+    $isManager=$_SESSION['isManager'];
     $searchUser=trim($_POST['searchUser']);
     $_SESSION['searchUserTemp']=$searchUser;
 

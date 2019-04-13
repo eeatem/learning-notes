@@ -130,10 +130,11 @@
     <?php echo "<span class=error>" . $error4 . "</span>"; ?><br/>
     确认密码：<input type="password" name="repassword"/>
     <?php echo "<span class=error>" . $error5 . "</span>"; ?><br/>
-    验证码&emsp;：<input size="2" type="text" name="checkCode"/>
+    验证码&emsp;：<input size="5" type="text" name="checkCode"/>
     <?php echo "<span class=error>" . $error6 . "</span>"; ?><br/>
     <img src="check_code.php"><br>
     <input type="submit" value="注册"/>
+    <a href="home.php"><input type="button" value="返回主页"></a>
 </form>
 
 </body>

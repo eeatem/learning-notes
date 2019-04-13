@@ -37,9 +37,6 @@
     $hobby6        = $_POST['hobby6'];
     $label         = $_POST['label'];
     $introduce     = $_POST['introduce'];
-    // 初始化错误信息
-    $error1 = '';
-    $error2 = '';
     // 用户判断是否满足条件提交个人资料的修改
     $isEmpty = true;
 
@@ -131,8 +128,10 @@
     */
     // 该模块用于把用户修改的个人信息插入到数据库中
     if ($_SERVER['REQUEST_METHOD'] == "POST" && $isEmpty == true) {
-        $sql = "insert into t_introduce values (NULL, '$userName', '$birthdayYear', '$birthdayMonth', '$location','$hobby1',
-                                                    '$hobby2','$hobby3','$hobby4','$hobby5','$hobby6', '$label', '$introduce')";
+        $sql = "insert into t_introduce (`user_name`,`birthday_year`,`birthday_month`,`location`,`hobby1`,`hobby2`,`hobby3`,
+                `hobby4`,`hobby5`,`hobby6`,`label`,`introduce`)
+                values ('$userName', '$birthdayYear', '$birthdayMonth', '$location','$hobby1','$hobby2','$hobby3','$hobby4',
+                '$hobby5','$hobby6', '$label', '$introduce')";
         // 判断个人资料是否修改成功
         if (mysqli_query($connect, $sql)) {
             echo '个人资料修改成功！';

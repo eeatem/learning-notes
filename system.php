@@ -21,7 +21,7 @@
     include 'connection.php';
     session_start();
 
-    echo "<a href='list_weibo_by_username.php'><input type='button' value='根据用户名查找微博'></a>&nbsp;";
+    echo "<br><a href='list_weibo_by_username.php'><input type='button' value='根据用户名查找微博'></a>&nbsp;";
     echo "<a href='list_weibo_by_type.php'><input type='button' value='根据类型查找微博'></a>&nbsp;";
     echo "<a href='list_weibo_by_keyword.php'><input type='button' value='根据关键字查找微博'></a>&nbsp;";
     echo "<a href='temp_m.php'><input type='button' value='返回菜单'/></a><br>";
@@ -80,7 +80,7 @@
     while ($row = mysqli_fetch_array($result)) {
         ?>
         <tr bgcolor="#eff3ff">
-            <td>发送人：<?= $row['user_name']; ?> —— 类型：<?= $row['weibo_type']; ?> —— 点赞数：<?= $row['like']; ?>&emsp;<a href="like_mlw.php?id=<?= $row['id']; ?>"><input type="button" value="点赞"></a></td>
+            <td>发送人：<?= $row['user_name']; ?> —— 类型：<?= $row['weibo_type']; ?> —— 点赞数：<?= $row['praise']; ?></a></td>
         </tr>
         <tr bgcolor="#ffffff">
             <td>正文：<?= $row['weibo_content']; ?> </td>

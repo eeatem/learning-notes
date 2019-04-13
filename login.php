@@ -93,6 +93,7 @@
     <?php echo "<span class=error>" . $error3 . "</span>"; ?><br/>
     <img src="check_code.php"><br>
     <input type="submit" value="登陆"/>
+    <a href="home.php"><input type="button" value="返回主页"></a>
 
 </form>
 </body>
