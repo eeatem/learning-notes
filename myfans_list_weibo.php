@@ -17,12 +17,18 @@
  * Time: 02:15
  * Func: 显示我的粉丝的微博
  */
-    error_reporting(E_ALL ^ E_NOTICE);
+    error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
     include 'connection.php';
     session_start();
     $userName=$_SESSION['followUserTemp'];
     // echo $userName;
     $isManager = $_SESSION['isManager'];
+    // 获取登陆用户id
+    $sql="select * from t_user where user_name = '$_SESSION[userNameTemp]'";
+    $result=mysqli_query($connect,$sql);
+    $row=mysqli_fetch_assoc($result);
+    $uId=$row['id'];
+        // echo $uId;
 
     echo "<br><a href='myfollow_list_weibo_by_type.php'><input type='button' value='根据类型查找微博'></a>&nbsp;";
     echo "<a href='myfollow_list_weibo_by_keyword.php'><input type='button' value='根据关键字查找微博'></a>&nbsp;";
@@ -85,7 +91,18 @@
         while ($row = mysqli_fetch_array($result)) {
     ?>
         <tr bgcolor="#eff3ff">
-            <td>类型：<?= $row['weibo_type']; ?> —— 点赞数：<?= $row['praise']; ?>&emsp;<a href="like_nlw.php?id=<?= $row['id']; ?>"><input type="button" value="点赞"></a></td>
+            <td>类型：<?= $row['weibo_type']; ?> —— 点赞数：<?= $row['praise']; ?>&emsp;
+                <?
+                    $sql="select * from t_like where `user_id` = '$uId' and `weibo_id` = '$row[id]'";
+                    $result1=mysqli_query($connect,$sql);
+                    $isLike=mysqli_fetch_array($result1);
+                    if(!$isLike) {
+                        echo "<a href = 'like_nlw.php?id=$row[id]' ><input type = 'button' value = '点赞'/></a>";
+                    }else{
+                        echo "<a href = 'unlike_nlw.php?id=$row[id]' ><input type = 'button' value = '取消点赞'/></a>";
+                    }
+                ?>
+            </td >
         </tr>
         <tr bgcolor="#ffffff">
             <td>正文：<?= $row['weibo_content']; ?> </td>
